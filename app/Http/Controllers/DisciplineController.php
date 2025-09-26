@@ -11,10 +11,10 @@ class DisciplineController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index() {
-
-        return Inertia::render('Disciplines/Index', [
-            'disciplines' => Discipline::all()
+    public function index()
+    {
+        return Inertia::render('disciplines', [
+            'disciplines' => Discipline::all(),
         ]);
     }
 
@@ -28,6 +28,15 @@ class DisciplineController extends Controller
             'code' => 'required|string|max:30|unique:disciplines,code',
             'ch' => 'required|integer|min:1000',
             'active' => 'boolean',
+        ], [
+            'name.required' => 'O campo nome é obrigatório.',
+            'name.max' => 'O campo nome não pode ter mais de 40 caracteres.',
+            'code.required' => 'O campo código é obrigatório.',
+            'code.max' => 'O campo código não pode ter mais de 30 caracteres.',
+            'code.unique' => 'O código informado já está em uso.',
+            'ch.required' => 'O campo carga horária é obrigatório.',
+            'ch.integer' => 'O campo carga horária deve ser um número inteiro.',
+            'ch.min' => 'A carga horária mínima é de 1000 horas.',
         ]);
 
         Discipline::create($request->all());
@@ -45,6 +54,15 @@ class DisciplineController extends Controller
             'code' => 'required|string|max:30|unique:disciplines,code,' . $discipline->id,
             'ch' => 'required|integer|min:1000',
             'active' => 'boolean',
+        ], [
+            'name.required' => 'O campo nome é obrigatório.',
+            'name.max' => 'O campo nome não pode ter mais de 40 caracteres.',
+            'code.required' => 'O campo código é obrigatório.',
+            'code.max' => 'O campo código não pode ter mais de 30 caracteres.',
+            'code.unique' => 'O código informado já está em uso.',
+            'ch.required' => 'O campo carga horária é obrigatório.',
+            'ch.integer' => 'O campo carga horária deve ser um número inteiro.',
+            'ch.min' => 'A carga horária mínima é de 1000 horas.',
         ]);
 
         $discipline->update($request->all());
